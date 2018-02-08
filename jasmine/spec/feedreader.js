@@ -9,6 +9,7 @@ $(function() {
      * the allFeeds variable in our application.
      */
     describe('RSS Feeds', function() {
+
         /* This test tests to make sure that the
          * allFeeds variable has been defined and that it is not
          * empty.
@@ -45,6 +46,7 @@ $(function() {
 
     // This suite tests the behavior of the slide menu.
     describe('The Menu', function() {
+        
         /* This test ensures the menu element is
          * hidden by default.
          */
@@ -105,7 +107,7 @@ $(function() {
                 });
             });
         });
-        
+
         /* This test ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
