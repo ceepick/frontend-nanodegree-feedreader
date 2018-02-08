@@ -58,6 +58,7 @@ $(function() {
           */
           it('toggles visibility when the menu icon is clicked', function() {
             const menuToggle = document.querySelector('.menu-icon-link');
+            const bodyClasses = document.body.className;
 
             // toggle open
             menuToggle.click();
@@ -69,19 +70,48 @@ $(function() {
           });
       });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    // This suite tests Initial Entry logic
+    describe('Initial Entries', function() {
 
-        /* TODO: Write a test that ensures when the loadFeed
+        beforeEach(function(done) {
+            const feedId = Math.floor(Math.random() * 4);
+            loadFeed(feedId, function() {
+                done();
+            });
+        });
+
+        /* This test ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+         it('have at least 1 entry in the feed container after loadFeed is called', function() {
+            var entries = document.querySelector(".feed").getElementsByClassName("entry");
+            expect(entries.length).not.toBe(0);
+         });
+     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    // This suite test New Feed Selection logic
+    describe('New Feed Selection', function() {
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+        let feed1, feed2;
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                feed1Content = document.querySelector(".feed").innerHTML;
+
+                const feed2Id = Math.floor(Math.random() * 4) + 1;
+                loadFeed(feed2Id, function() {
+                    feed2Content = document.querySelector(".feed").innerHTML;
+                    done();
+                });
+            });
+        });
+        
+        /* This test ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         it('changes feed content when a new feed is loaded', function() {
+            expect(feed1Content).not.toBe(feed2Content);
+         });
+     });
 }());
